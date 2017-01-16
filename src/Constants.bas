@@ -1,5 +1,5 @@
 Attribute VB_Name = "Constants"
-Function SpeedOfLight() As Integer
+Function SpeedOfLight() As Long
 
     SpeedOfLight = 299792458
 
