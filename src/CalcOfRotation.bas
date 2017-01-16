@@ -1,41 +1,18 @@
 Attribute VB_Name = "CalcOfRotation"
 Function Rotation(x As Double, y As Double, z As Double, roll As Double, pitch As Double, yaw As Double, sign As String) As Double
 
-    Dim cX As Double
-    Dim cY As Double
-    Dim cZ As Double
-
     'Roll Convert
-    cX = Math.Cos(roll) * x - Math.Sin(roll) * y
-    cY = Math.Sin(roll) * x + Math.Cos(roll) * y
-    cZ = z
-
-    x = cX
-    y = cY
-    z = cZ
-
-
+    x = RotTransU(x, y, roll)
+    y = RotTransL(x, y, roll)
+    
     'Pitch Convert
-    cY = Math.Cos(pitch) * y - Math.Sin(pitch) * z
-    cZ = Math.Sin(pitch) * y + Math.Cos(pitch) * z
-    cX = x
-
-    x = cX
-    y = cY
-    z = cZ
-
-
+    y = RotTransU(y, z, pitch)
+    z = RotTransL(y, z, pitch)
+    
     'Yaw Convert
-    cZ = Math.Cos(yaw) * z - Math.Sin(yaw) * x
-    cX = Math.Sin(yaw) * z + Math.Cos(yaw) * x
-    cY = y
-
-    x = cX
-    y = cY
-    z = cZ
-
-
-
+    z = RotTransU(z, x, yaw)
+    x = RotTransL(z, x, yaw)
+    
     If sign = "x" Then
 
         Rotation = x
@@ -50,4 +27,16 @@ Function Rotation(x As Double, y As Double, z As Double, roll As Double, pitch A
 
     End If
 
+End Function
+
+Private Function RotTransU(x As Double, y As Double, theta As Double) As Double
+
+    RotTransU = x * Math.Cos(theta) - y * Math.Sin(theta)
+    
+End Function
+
+Private Function RotTransL(x As Double, y As Double, theta As Double) As Double
+
+    RotTransL = x * Math.Sin(theta) + y * Math.Cos(theta)
+    
 End Function
