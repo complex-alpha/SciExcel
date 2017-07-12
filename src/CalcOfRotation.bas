@@ -1,17 +1,28 @@
 Attribute VB_Name = "CalcOfRotation"
 Function Rotation(x As Double, y As Double, z As Double, roll As Double, pitch As Double, yaw As Double, sign As String) As Double
 
+    'Temporary Variable
+    Dim cx As Double
+    Dim cy As Double
+    Dim cz As Double
+
     'Roll Convert
-    x = RotTransU(x, y, roll)
-    y = RotTransL(x, y, roll)
-    
+    cx = x
+    cy = y
+    x = RotTransU(cx, cy, roll)
+    y = RotTransL(cx, cy, roll)
+
     'Pitch Convert
-    y = RotTransU(y, z, pitch)
-    z = RotTransL(y, z, pitch)
+    cy = y
+    cz = z
+    y = RotTransU(cy, cz, pitch)
+    z = RotTransL(cy, cz, pitch)
     
     'Yaw Convert
-    z = RotTransU(z, x, yaw)
-    x = RotTransL(z, x, yaw)
+    cz = z
+    cx = x
+    z = RotTransU(cz, cx, yaw)
+    x = RotTransL(cz, cx, yaw)
     
     If sign = "x" Then
 
