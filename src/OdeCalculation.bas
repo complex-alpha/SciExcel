@@ -1,5 +1,4 @@
-Attribute VB_Name = "OdeCalculation"
-Function Euler(IndependentVariable As String, ObjectiveVariable As String, VarSchemes As Range, StepValue As Double, VarNames As Range, VarValues As Range, Constants As Range) As Double
+Function EulerCalc(IndependentVariable As String, ObjectiveVariable As String, VarSchemes As Range, StepValue As Double, VarNames As Range, VarValues As Range, Constants As Range) As Double
 
     Dim f As String
     
@@ -28,11 +27,11 @@ Function Euler(IndependentVariable As String, ObjectiveVariable As String, VarSc
     Next
     'Constant Set-----------------------------end
     
-    Euler = ValueMap(ObjectiveVariable) + XCalc(f, ValueMap) * StepValue
+    EulerCalc = ValueMap(ObjectiveVariable) + XCalc(f, ValueMap) * StepValue
 
 End Function
 
-Function RK4Calc(IndependentVariable As String, ObjectiveVariable As String, VarSchemes As Range, StepValue As Double, VarNames As Range, VarValues As Range, Constants As Range)
+Function RK4Calc(IndependentVariable As String, ObjectiveVariable As String, VarSchemes As Range, StepValue As Double, VarNames As Range, VarValues As Range, Constants As Range) As Double
 
     Dim fMap As New Collection
     For cnt = 1 To VarSchemes.Columns.Count
